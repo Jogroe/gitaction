@@ -1,3 +1,6 @@
+env:
+  image: "jonasgroetschel/flask-action:latest"
+
 name: GitHub Actions Demo
 on: [push]
 jobs:
@@ -11,12 +14,24 @@ jobs:
       - name: Exécuter le script Python
         run: python job.py
         working-directory: ./
+
       - run: python3 -m pip install pytest
       - run: pip install Flask
+
       - name: Exécuter le test Python
         run: pytest test.py
         working-directory: ./
-      - name: Exécuter l'application Flask
-        run: python app.py
-        working-directory: ./
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PWD }}
+
+      - name: Build Image and Push
+        run: |
+          docker build -t $image .
+          docker tag $image_name $image
+          docker push $image
+        
       
