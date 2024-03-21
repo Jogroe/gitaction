@@ -11,4 +11,8 @@ jobs:
       - name: Exécuter le script Python
         run: python job.py  # Exécutez le fichier job.py
         working-directory: ./
+      - run: python3 -m pip install pytest
+      - name: Exécuter le script Python
+        run: pytest test_mean.py  # Exécutez le fichier job.py
+        working-directory: ./
       
