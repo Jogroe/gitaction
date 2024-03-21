@@ -12,7 +12,7 @@ jobs:
         run: python job.py
         working-directory: ./
       - run: python3 -m pip install pytest
-      - name: Exécuter le script Python
+      - name: Exécuter le test Python
         run: pytest test.py
         working-directory: ./
       
