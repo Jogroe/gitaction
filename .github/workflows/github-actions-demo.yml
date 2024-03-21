@@ -12,7 +12,11 @@ jobs:
         run: python job.py
         working-directory: ./
       - run: python3 -m pip install pytest
+      - run: pip install Flask
       - name: Exécuter le test Python
         run: pytest test.py
+        working-directory: ./
+      - name: Exécuter l'application Flask
+        run: python app.py
         working-directory: ./
       
